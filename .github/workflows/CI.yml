@@ -9,9 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - '1.5'
-          - '^1.6.0-0'
-          - 'nightly'
+          - "^1.6.0-0"
         os:
           - ubuntu-latest
           - macOS-latest
@@ -21,6 +19,8 @@ jobs:
           - x86
         exclude:
           - os: macOS-latest
+            arch: x86
+          - os: windows-latest
             arch: x86
     steps:
       - uses: actions/checkout@v2
@@ -59,9 +59,8 @@ jobs:
             Pkg.instantiate()'
       - run: |
           julia --project=docs -e '
-            using Documenter: DocMeta, doctest
+            using Documenter: doctest
             using COPInstances
-            DocMeta.setdocmeta!(COPInstances, :DocTestSetup, :(using COPInstances); recursive=true)
             doctest(COPInstances)'
       - run: julia --project=docs docs/make.jl
         env:
