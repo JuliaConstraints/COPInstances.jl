@@ -3,6 +3,7 @@ using Documenter
 
 DocMeta.setdocmeta!(COPInstances, :DocTestSetup, :(using COPInstances); recursive=true)
 
+@info "Makeing documentation..."
 makedocs(;
     modules=[COPInstances],
     authors="Jean-Francois Baffier",
@@ -11,7 +12,7 @@ makedocs(;
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
         canonical="https://JuliaConstraints.github.io/COPInstances.jl",
-        assets=String[],
+        assets = ["assets/favicon.ico"; "assets/github_buttons.js"; "assets/custom.css"],
     ),
     pages=[
         "Home" => "index.md",
@@ -19,6 +20,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/JuliaConstraints/COPInstances.jl",
+    repo="github.com/JuliaConstraints/COPInstances.jl.git",
     devbranch="main",
 )
